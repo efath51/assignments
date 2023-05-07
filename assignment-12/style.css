@@ -9,7 +9,7 @@
   background-image: url(img.png);
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-image: linear-gradient(rgba(0,0,0,0,75),url(img.png)); */
+  background-image: linear-gradient(rgba(0,0,0,0,75));
 }
 form {
   width: 50%;
@@ -49,5 +49,9 @@ button:hover {
 }
 p{
 border: darkgreen;
-color: azure;
+color: rgb(6, 51, 51);
+background-color: yellowgreen;
+height: 35px;
+width: 300px;
+align-items: center;
 }
