@@ -1,0 +1,126 @@
+1.Explain what Laravel's query builder is and how it provides a simple and elegant way to interact with databases. 
+
+2.Write the code to retrieve the "excerpt" and "description" columns from the "posts" table using Laravel's query builder. Store the result in the $posts variable. Print the $posts variable.
+
+3.Describe the purpose of the distinct() method in Laravel's query builder. How is it used in conjunction with the select() method?
+
+4.Write the code to retrieve the first record from the "posts" table where the "id" is 2 using Laravel's query builder. Store the result in the $posts variable. Print the "description" column of the $posts variable.
+
+5.Write the code to retrieve the "description" column from the "posts" table where the "id" is 2 using Laravel's query builder. Store the result in the $posts variable. Print the $posts variable.
+
+6.Explain the difference between the first() and find() methods in Laravel's query builder. How are they used to retrieve single records?
+
+7.Write the code to retrieve the "title" column from the "posts" table using Laravel's query builder. Store the result in the $posts variable. Print the $posts variable.
+
+8.Write the code to insert a new record into the "posts" table using Laravel's query builder. Set the "title" and "slug" columns to 'X', and the "excerpt" and "description" columns to 'excerpt' and 'description', respectively. Set the "is_published" column to true and the "min_to_read" column to 2. Print the result of the insert operation.
+
+9.Write the code to update the "excerpt" and "description" columns of the record with the "id" of 2 in the "posts" table using Laravel's query builder. Set the new values to 'Laravel 10'. Print the number of affected rows.
+
+10.Write the code to delete the record with the "id" of 3 from the "posts" table using Laravel's query builder. Print the number of affected rows.
+
+11.Explain the purpose and usage of the aggregate methods count(), sum(), avg(), max(), and min() in Laravel's query builder. Provide an example of each.
+
+12.Describe how the whereNot() method is used in Laravel's query builder. Provide an example of its usage.
+
+13.Explain the difference between the exists() and doesntExist() methods in Laravel's query builder. How are they used to check the existence of records?
+
+14.Write the code to retrieve records from the "posts" table where the "min_to_read" column is between 1 and 5 using Laravel's query builder. Store the result in the $posts variable. Print the $posts variable.
+
+15.Write the code to increment the "min_to_read" column value of the record with the "id" of 3 in the "posts" table by 1 using Laravel's query builder. Print the number of affected rows.
+
+
+
+
+ans 1: Laravel's query builder is a powerful feature that provides a convenient and expressive way to interact with databases in Laravel applications. It allows us to construct database queries using a fluent, chainable interface, enabling us to retrieve and manipulate data without writing raw SQL queries.
+
+ans 2:
+$posts = DB::table('posts')->select('excerpt', 'description')->get();
+
+print_r($posts);
+
+ans 3:The distinct() method in Laravel query builder is used to retrieve only unique rows from a query result.
+
+ans 4:$posts = DB::table('posts')
+            ->find('id', 2);
+	echo $posts;
+
+ans 5:
+$posts = DB::table('posts')
+            ->where('id', 2)
+            ->pluck('description');
+
+print_r($posts);
+
+ans 6:
+ first()->The first() method is used to retrieve the first record that matches the query criteria. It returns a single object representing the first record found in the result set.
+
+ find()->retrieves a record by its primary key value, returning a single object. It is useful when you know the primary key value of the record you want to retrieve.
+
+ANS 7:
+$posts = DB::table('posts')
+            ->pluck('title');
+
+print_r($posts);
+
+ANS 8:
+
+$result = DB::table('posts')->insert([
+    'title' => 'X',
+    'slug' => 'X',
+    'excerpt' => 'excerpt',
+    'description' => 'description',
+    'is_published' => true,
+    'min_to_read' => 2,
+]);
+
+if ($result) {
+    echo "Record inserted successfully.";
+} else {
+    echo "Failed to insert record.";
+}
+
+ans 9:
+
+$affectedRows = DB::table('posts')
+                ->where('id', 2)
+                ->update([
+                    'excerpt' => 'Laravel 10',
+                    'description' => 'Laravel 10'
+                ]);
+
+echo "Number of affected rows: " . $affectedRows;
+
+ans 10:
+$affectedRows = DB::table('posts')
+                ->where('id', 3)
+                ->delete();
+
+echo "Number of affected rows: " . $affectedRows;
+
+ans 11:
+count(): The count() method is used to retrieve the number of records that match a query. It returns the count as an integer.
+sum(): The sum() method is used to calculate the total sum of a specific column's values. It returns the sum as a numeric value.
+avg(): The avg() method is used to calculate the average value of a specific column's values. It returns the average as a numeric value.
+max(): The max() method is used to retrieve the maximum value of a specific column's values. It returns the maximum value.
+min(): The min() method is used to retrieve the minimum value of a specific column's values. It returns the minimum value.
+
+ans 12:
+It allows you to retrieve records where a specific column's value is not equal to the provided value or does not match a given condition.
+
+ans 13:
+exists(): The exists() method is used to check if any records exist in the result set of a query. It returns true if at least one record exists, and false otherwise.
+doesntExist(): The doesntExist() method is the negation of exists(). It is used to check if no records exist in the result set of a query. It returns true if no records exist, and false if there is at least one record.
+
+ans 14:
+$posts = DB::table('posts')
+            ->whereBetween('min_to_read', [1, 5])
+            ->get();
+
+print_r($posts);
+
+ans 15:
+$affectedRows = DB::table('posts')
+                ->where('id', 3)
+                ->increment('min_to_read', 1);
+
+echo "Number of affected rows: " . $affectedRows;
